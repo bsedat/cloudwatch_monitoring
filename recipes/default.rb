@@ -99,7 +99,7 @@ end
 
 options = ['--from-cron'] + node[:cw_mon][:options]
 
-if iam_role = IAM::role
+if node.attribute?('ec2') && (iam_role = IAM::role)
   log "IAM role available: #{iam_role}"
 else
   log "no IAM role available. CloudWatch Monitoring scripts will use IAM user #{node[:cw_mon][:user]}" do
